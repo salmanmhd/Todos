@@ -1,14 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import EditForm from './EditForm';
 import { Trash2 } from 'lucide-react';
+import { TaskContext } from '../App';
 
-function TaskList({
-  tasks,
-  onCheckTask,
-  onDeleteTask,
-  onUpdateTask,
-  sortBy = 'input',
-}) {
+function TaskList({ tasks, sortBy = 'input' }) {
+  const { onCheckTask, onDeleteTask } = useContext(TaskContext);
   const [editTaskId, setEditTaskId] = useState(null);
 
   function handleEditClose() {
@@ -25,7 +21,7 @@ function TaskList({
   if (sortBy === 'priority')
     sortedTask = tasks
       .slice()
-      .sort((a, b) => Number(b.priority) - Number(a.priority));
+      .sort((a, b) => Number(a.priority) - Number(b.priority));
   if (sortBy === 'date') return;
   if (sortBy === 'title')
     sortedTask = tasks.slice().sort((a, b) => a.title.localeCompare(b.title));
@@ -59,7 +55,7 @@ function TaskList({
                 className='font-thin'
                 style={{ color: task.isCompleted ? 'grey' : 'black' }}
               >
-                {task.desc}
+                {new Date(task.date).toLocaleDateString()}
               </p>
             </div>
             <div
@@ -72,11 +68,7 @@ function TaskList({
               <Trash2 />
             </div>
             {editTaskId === task.id && (
-              <EditForm
-                task={task}
-                onClose={handleEditClose}
-                onUpdateTask={onUpdateTask}
-              />
+              <EditForm task={task} onClose={handleEditClose} />
             )}
           </div>
         );

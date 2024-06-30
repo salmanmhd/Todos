@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import TaskList from '../components/TaskList';
+import { TaskContext } from '../App';
 
-function AllTask({ tasks, onCheckTask, onDeleteTask, onUpdateTask }) {
+function AllTask() {
   const [sortBy, setSortBy] = useState('input');
+  const { tasks } = useContext(TaskContext);
   return (
     <div className='my-10 mx-16'>
       <select
@@ -15,13 +17,7 @@ function AllTask({ tasks, onCheckTask, onDeleteTask, onUpdateTask }) {
         <option value='completed'>sort by completed</option>
         <option value='date'>sort by date</option>
       </select>
-      <TaskList
-        tasks={tasks}
-        onCheckTask={onCheckTask}
-        onDeleteTask={onDeleteTask}
-        onUpdateTask={onUpdateTask}
-        sortBy={sortBy}
-      />
+      <TaskList tasks={tasks} sortBy={sortBy} />
     </div>
   );
 }

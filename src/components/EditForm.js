@@ -1,8 +1,10 @@
 import { X } from 'lucide-react';
 import Form from './Form';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { TaskContext } from '../App';
 
-function EditForm({ task, onClose, onUpdateTask }) {
+function EditForm({ task, onClose }) {
+  const { onUpdateTask } = useContext(TaskContext);
   const modalRef = useRef();
 
   const closeModal = (e) => {

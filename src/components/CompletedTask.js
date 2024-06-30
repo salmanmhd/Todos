@@ -1,13 +1,9 @@
+import { useContext } from 'react';
 import TaskList from './TaskList';
+import { TaskContext } from '../App';
 
-function CompletedTask({
-  tasks,
-  onAddTask,
-  onCheckTask,
-  onDeleteTask,
-  onUpdateTask,
-  onClearCompletedTask,
-}) {
+function CompletedTask() {
+  const { tasks, onClearCompletedTask } = useContext(TaskContext);
   const completedTasks = tasks.filter((task) => task.isCompleted);
 
   return (
@@ -21,13 +17,7 @@ function CompletedTask({
           clear completed
         </button>
       </div>
-      <TaskList
-        tasks={completedTasks}
-        onAddTask={onAddTask}
-        onCheckTask={onCheckTask}
-        onDeleteTask={onDeleteTask}
-        onUpdateTask={onUpdateTask}
-      />
+      <TaskList tasks={completedTasks} />
     </div>
   );
 }

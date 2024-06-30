@@ -1,15 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import TaskList from './TaskList';
+import { TaskContext } from '../App';
 
-function IncompletedTask({
-  tasks,
-  onAddTask,
-  onCheckTask,
-  onDeleteTask,
-  onUpdateTask,
-}) {
+function IncompletedTask() {
   const [sortBy, setSortBy] = useState('input');
-
+  const { tasks } = useContext(TaskContext);
   const incompletedTasks = tasks.filter((task) => !task.isCompleted);
   return (
     <>
@@ -24,14 +19,7 @@ function IncompletedTask({
         <option value='date'>sort by date</option>
       </select>
       <div className='divide-y divide-slate-300'>
-        <TaskList
-          tasks={incompletedTasks}
-          onAddTask={onAddTask}
-          onCheckTask={onCheckTask}
-          onDeleteTask={onDeleteTask}
-          onUpdateTask={onUpdateTask}
-          sortBy={sortBy}
-        />
+        <TaskList tasks={incompletedTasks} sortBy={sortBy} />
       </div>
     </>
   );

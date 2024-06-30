@@ -7,4 +7,6 @@ Taks:
 5. bug fix ✅
 6. Add edit option in tasks✅
 7. Add sort feature✅
-8. Push to github
+8. Push to github // committed as of now
+9. add date and related features
+10.
